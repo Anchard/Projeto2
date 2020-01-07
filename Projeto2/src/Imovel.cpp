@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void Imovel::setTipo(string tipo){
+void Imovel::setTipo(int tipo){
     this->tipo = tipo;
 }
 void Imovel::setTitulo(string titulo){
@@ -24,7 +24,7 @@ void Imovel::setNumero(string numero){
 void Imovel::setCep(string cep){
     this->cep = cep;
 }
-void Imovel::setAluga_vende(string aluga_vende){
+void Imovel::setAluga_vende(int aluga_vende){
     this->aluga_vende = aluga_vende;
 }
 void Imovel::setPrecoVenda(float precoVenda){
@@ -34,7 +34,7 @@ void Imovel::setPrecoAluguel(float precoAluguel){
     this->precoAluguel = precoAluguel;
 }
 
-string Imovel::getTipo(){
+int Imovel::getTipo(){
     return this->tipo;
 }
 string Imovel::getTitulo(){
@@ -55,7 +55,7 @@ string Imovel::getNumero(){
 string Imovel::getCep(){
     return this->cep;
 }
-string Imovel::getAluga_vende(){
+int Imovel::getAluga_vende(){
     return this->aluga_vende;
 }
 float Imovel::getPrecoVenda(){
