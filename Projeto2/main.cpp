@@ -3,8 +3,156 @@
 #include "Casa.h"
 #include "Apartamento.h"
 #include <vector>
+#include <stdio.h>
 
 using namespace std;
+
+string upperCase(string input) {
+    for (string::iterator it = input.begin(); it != input.end(); ++ it)
+        *it = toupper((unsigned char)*it);
+    return input;
+}
+
+void listar(vector<Imovel> listaImoveis, int imoveis){
+    int opcao;
+
+    cout << "Que Tipo de Listagem?" << endl;
+    cout << "1. Todos os Imoveis" << endl;
+    cout << "2. Imoveis Por Tipo" << endl;
+    cout << "3. Por Aluguel ou Venda" << endl;
+    cout << "Escolha: ";
+    cin >> opcao;
+    cout << endl;
+
+    switch(opcao){
+        case 1:
+            for(int i = 0; i < imoveis; i++){
+                cout << "Titulo: " << listaImoveis[i].getTitulo() << endl;
+                cout << "Cidade: " << listaImoveis[i].getCidade() << endl;
+                cout << "Bairro: " << listaImoveis[i].getBairro() << endl;
+                cout << "Preco de Venda: R$ " << listaImoveis[i].getPrecoVenda() << endl;
+                cout << "Preco do Aluguel: R$ " << listaImoveis[i].getPrecoAluguel() << "\n\n";
+            }
+
+            break;
+
+        case 2:
+            int opcao;
+            cout << "Qual Tipo Deseja Pesquisar?" << endl;
+            cout << "0. Casa" << endl;
+            cout << "1. Apartamento" << endl;
+            cout << "2. Terreno" << endl;
+            cout << "Escolha: ";
+            cin >> opcao;
+            cout << endl;
+
+            for(int i = 0; i < imoveis; i++){
+                if(opcao == listaImoveis[i].getTipo())
+                    listaImoveis[i].show();
+            }
+
+            break;
+
+        case 3:
+            cout << "Qual Categoria Deseja Pesquisar?" << endl;
+            cout << "0. Aluguel" << endl;
+            cout << "1. Venda" << endl;
+            cout << "Escolha: ";
+            cin >> opcao;
+            cout << endl;
+
+            for(int i = 0; i < imoveis; i++){
+                if(opcao == listaImoveis[i].getAluga_vende())
+                    listaImoveis[i].show();
+            }
+
+            break;
+    }
+}
+
+void buscar(vector<Imovel> listaImoveis, int imoveis){
+    int opcao;
+
+    cout << "Que Tipo de Busca" << endl;
+    cout << "1. Cidade" << endl;
+    cout << "2. Bairro" << endl;
+    cout << "3. Titulo" << endl;
+    cout << "4. Preco de Aluguel" << endl;
+    cout << "5. Preco de Venda" << endl;
+    cout << "Escolha: ";
+    cin >> opcao;
+    cout << endl;
+
+    string target;
+    float valor;
+    switch(opcao){
+        case 1:
+            cout << "Digite o nome da Cidade: ";
+            fflush(stdin);
+            cin >> target;
+            fflush(stdin);
+            cout << endl;
+
+            for(int i = 0; i < imoveis; i++){
+                if(upperCase(listaImoveis[i].getCidade()).find(upperCase(target)) != string::npos )
+                    listaImoveis[i].show();
+            }
+
+            break;
+
+        case 2:
+            cout << "Digite o nome do Bairro: ";
+            fflush(stdin);
+            cin >> target;
+            fflush(stdin);
+            cout << endl;
+
+            for(int i = 0; i < imoveis; i++){
+                if(upperCase(listaImoveis[i].getBairro()).find(upperCase(target)) != string::npos )
+                    listaImoveis[i].show();
+            }
+
+            break;
+
+         case 3:
+            cout << "Digite o Titulo: ";
+            fflush(stdin);
+            cin >> target;
+            fflush(stdin);
+            cout << endl;
+
+            for(int i = 0; i < imoveis; i++){
+                if(upperCase(listaImoveis[i].getTitulo()).find(upperCase(target)) != string::npos )
+                    listaImoveis[i].show();
+            }
+
+            break;
+
+         case 4:
+            cout << "Digite o Preco do Aluguel Desejado: R$  ";
+            cin >> valor;
+            cout << endl;
+
+            for(int i = 0; i < imoveis; i++){
+                if(listaImoveis[i].getPrecoAluguel() <= valor && listaImoveis[i].getPrecoAluguel() > 0)
+                    listaImoveis[i].show();
+            }
+
+            break;
+
+         case 5:
+            cout << "Digite o Preco do Imovel Desejado: R$  ";
+            cin >> valor;
+            cout << endl;
+
+            for(int i = 0; i < imoveis; i++){
+                if(listaImoveis[i].getPrecoVenda() <= valor && listaImoveis[i].getPrecoVenda() > 0)
+                    listaImoveis[i].show();
+            }
+
+            break;
+    }
+}
 
 void menu(vector<Imovel> listaImoveis, int imoveis){
     int opcao;
@@ -12,6 +160,7 @@ void menu(vector<Imovel> listaImoveis, int imoveis){
     cout << "Qual Operacao Deseja Realizar?" << endl;
     cout << "1. Inserir Imovel" << endl;
     cout << "2. Listar Imovel" << endl;
+    cout << "3. Buscar Imovel" << endl;
     cout << "Escolha: ";
     cin >> opcao;
     cout << endl;
@@ -21,61 +170,15 @@ void menu(vector<Imovel> listaImoveis, int imoveis){
             break;
 
         case 2:
-            int opcao;
+            listar(listaImoveis, imoveis);
+            break;
 
-            cout << "Que Tipo de Listagem?" << endl;
-            cout << "1. Todos os Imoveis" << endl;
-            cout << "2. Imoveis Por Tipo" << endl;
-            cout << "3. Por Aluguel ou Venda" << endl;
-            cout << "Escolha: ";
-            cin >> opcao;
-            cout << endl;
+        case 3:
+            buscar(listaImoveis, imoveis);
+            break;
 
-            switch(opcao){
-                case 1:
-                    for(int i = 0; i < imoveis; i++){
-                        cout << "Titulo: " << listaImoveis[i].getTitulo() << endl;
-                        cout << "Cidade: " << listaImoveis[i].getCidade() << endl;
-                        cout << "Bairro: " << listaImoveis[i].getBairro() << endl;
-                        cout << "Preco de Venda: R$ " << listaImoveis[i].getPrecoVenda() << endl;
-                        cout << "Preco do Aluguel: R$ " << listaImoveis[i].getPrecoAluguel() << "\n\n";
-                    }
 
-                    break;
 
-                case 2:
-                    int opcao;
-                    cout << "Qual Tipo Deseja Pesquisar?" << endl;
-                    cout << "0. Casa" << endl;
-                    cout << "1. Apartamento" << endl;
-                    cout << "2. Terreno" << endl;
-                    cout << "Escolha: ";
-                    cin >> opcao;
-                    cout << endl;
-
-                    for(int i = 0; i < imoveis; i++){
-                        if(opcao == listaImoveis[i].getTipo())
-                            listaImoveis[i].show();
-                    }
-
-                    break;
-
-                case 3:
-                    cout << "Qual Categoria Deseja Pesquisar?" << endl;
-                    cout << "0. Aluguel" << endl;
-                    cout << "1. Venda" << endl;
-                    cout << "Escolha: ";
-                    cin >> opcao;
-                    cout << endl;
-
-                    for(int i = 0; i < imoveis; i++){
-                        if(opcao == listaImoveis[i].getAluga_vende())
-                            listaImoveis[i].show();
-                    }
-
-                    break;
-
-            }
     }
 
 }

@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1578363843 source:c:\users\lucas\documents\codes\projeto2\main.cpp
+1578482182 source:c:\users\lucas\documents\codes\projeto2\main.cpp
 	<iostream>
 	"Imovel.h"
 	"Casa.h"
 	"Apartamento.h"
 	<vector>
+	<stdio.h>
 
 1578363766 source:c:\users\lucas\documents\codes\projeto2\src\imovel.cpp
 	"Imovel.h"
