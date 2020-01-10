@@ -13,8 +13,9 @@ string upperCase(string input) {
     return input;
 }
 
-void listar(vector<Imovel> listaImoveis, int imoveis){
+void listar(vector<Imovel> listaImoveis){
     int opcao;
+    int elementos = listaImoveis.size();
 
     cout << "Que Tipo de Listagem?" << endl;
     cout << "1. Todos os Imoveis" << endl;
@@ -26,7 +27,7 @@ void listar(vector<Imovel> listaImoveis, int imoveis){
 
     switch(opcao){
         case 1:
-            for(int i = 0; i < imoveis; i++){
+            for(int i = 0; i < elementos; i++){
                 cout << "Titulo: " << listaImoveis[i].getTitulo() << endl;
                 cout << "Cidade: " << listaImoveis[i].getCidade() << endl;
                 cout << "Bairro: " << listaImoveis[i].getBairro() << endl;
@@ -46,7 +47,7 @@ void listar(vector<Imovel> listaImoveis, int imoveis){
             cin >> opcao;
             cout << endl;
 
-            for(int i = 0; i < imoveis; i++){
+            for(int i = 0; i < elementos; i++){
                 if(opcao == listaImoveis[i].getTipo())
                     listaImoveis[i].show();
             }
@@ -61,7 +62,7 @@ void listar(vector<Imovel> listaImoveis, int imoveis){
             cin >> opcao;
             cout << endl;
 
-            for(int i = 0; i < imoveis; i++){
+            for(int i = 0; i < elementos; i++){
                 if(opcao == listaImoveis[i].getAluga_vende())
                     listaImoveis[i].show();
             }
@@ -70,8 +71,9 @@ void listar(vector<Imovel> listaImoveis, int imoveis){
     }
 }
 
-void buscar(vector<Imovel> listaImoveis, int imoveis){
+void buscar(vector<Imovel> listaImoveis){
     int opcao;
+    int elementos = listaImoveis.size();
 
     cout << "Que Tipo de Busca" << endl;
     cout << "1. Cidade" << endl;
@@ -93,8 +95,9 @@ void buscar(vector<Imovel> listaImoveis, int imoveis){
             fflush(stdin);
             cout << endl;
 
-            for(int i = 0; i < imoveis; i++){
+            for(int i = 0; i < elementos; i++){
                 if(upperCase(listaImoveis[i].getCidade()).find(upperCase(target)) != string::npos )
+                    cout << "ID: " << i << endl;
                     listaImoveis[i].show();
             }
 
@@ -107,8 +110,9 @@ void buscar(vector<Imovel> listaImoveis, int imoveis){
             fflush(stdin);
             cout << endl;
 
-            for(int i = 0; i < imoveis; i++){
+            for(int i = 0; i < elementos; i++){
                 if(upperCase(listaImoveis[i].getBairro()).find(upperCase(target)) != string::npos )
+                    cout << "ID: " << i << endl;
                     listaImoveis[i].show();
             }
 
@@ -121,8 +125,9 @@ void buscar(vector<Imovel> listaImoveis, int imoveis){
             fflush(stdin);
             cout << endl;
 
-            for(int i = 0; i < imoveis; i++){
+            for(int i = 0; i < elementos; i++){
                 if(upperCase(listaImoveis[i].getTitulo()).find(upperCase(target)) != string::npos )
+                    cout << "ID: " << i << endl;
                     listaImoveis[i].show();
             }
 
@@ -133,8 +138,9 @@ void buscar(vector<Imovel> listaImoveis, int imoveis){
             cin >> valor;
             cout << endl;
 
-            for(int i = 0; i < imoveis; i++){
+            for(int i = 0; i < elementos; i++){
                 if(listaImoveis[i].getPrecoAluguel() <= valor && listaImoveis[i].getPrecoAluguel() > 0)
+                    cout << "ID: " << i << endl;
                     listaImoveis[i].show();
             }
 
@@ -145,8 +151,9 @@ void buscar(vector<Imovel> listaImoveis, int imoveis){
             cin >> valor;
             cout << endl;
 
-            for(int i = 0; i < imoveis; i++){
+            for(int i = 0; i < elementos; i++){
                 if(listaImoveis[i].getPrecoVenda() <= valor && listaImoveis[i].getPrecoVenda() > 0)
+                    cout << "ID: " << i << endl;
                     listaImoveis[i].show();
             }
 
@@ -154,13 +161,26 @@ void buscar(vector<Imovel> listaImoveis, int imoveis){
     }
 }
 
-void menu(vector<Imovel> listaImoveis, int imoveis){
+void remover(vector<Imovel> &listaImoveis){
+    int id;
+
+    buscar(listaImoveis);
+    cout << "Digite o ID do Imovel que Deseja Remover: ";
+    cin >> id;
+    cout << endl;
+
+    listaImoveis.erase(listaImoveis.begin() + id);
+    cout << "Elemento Removido!" << "\n\n";
+}
+
+void menu(vector<Imovel> &listaImoveis){
     int opcao;
 
     cout << "Qual Operacao Deseja Realizar?" << endl;
     cout << "1. Inserir Imovel" << endl;
     cout << "2. Listar Imovel" << endl;
     cout << "3. Buscar Imovel" << endl;
+    cout << "4. Remover Imovel" << endl;
     cout << "Escolha: ";
     cin >> opcao;
     cout << endl;
@@ -170,11 +190,15 @@ void menu(vector<Imovel> listaImoveis, int imoveis){
             break;
 
         case 2:
-            listar(listaImoveis, imoveis);
+            listar(listaImoveis);
             break;
 
         case 3:
-            buscar(listaImoveis, imoveis);
+            buscar(listaImoveis);
+            break;
+
+        case 4:
+            remover(listaImoveis);
             break;
 
 
@@ -185,13 +209,11 @@ void menu(vector<Imovel> listaImoveis, int imoveis){
 
 int main(){
     vector<Imovel> listaImoveis;
-    int imoveis = 0;
 
     Imovel imovel(2, "Terreno Legal em Mangabeira", "Joao Pessoa", "Mangabeira", "Estudante Marizete",
                   "246", "58058-300", 0, -1, 520.24);
 
     listaImoveis.push_back(imovel);
-    imoveis++;
     //imovel.show();
 
     Casa casa(0, "Casa Bonita na Torre", "Joao Pessoa", "Torre", "Geminiano da Franca", "231", "58040-560", 1,
@@ -203,17 +225,16 @@ int main(){
     casa.setPavimentos(2);
 
     listaImoveis.push_back(casa);
-    imoveis++;
     //casa.show();
 
     Apartamento ap(1, "Apartamento Luxuoso", "Joao Pessoa", "Manaira", "Rua da Soberba", "621", "58058-621",
                    1, 950000, -1, 350, 5, "Nascente do Poente", 7, 932.47, 2);
 
     listaImoveis.push_back(ap);
-    imoveis++;
     //ap.show();
 
-    menu(listaImoveis, imoveis);
+    while(true)
+        menu(listaImoveis);
 
     return 0;
 }
