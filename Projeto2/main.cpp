@@ -173,6 +173,131 @@ void remover(vector<Imovel> &listaImoveis){
     cout << "Elemento Removido!" << "\n\n";
 }
 
+void editar(vector<Imovel> &listaImoveis){
+    int id;
+
+    buscar(listaImoveis);
+    cout << "Digite o ID do Imovel que Deseja Editar: ";
+    cin >> id;
+    cout << endl;
+
+    switch(listaImoveis[id].getTipo()){
+        case 0:
+            int opcao;
+
+            cout << "01. Editar Titulo" << endl;
+            cout << "02. Editar Cidade" << endl;
+            cout << "03. Editar Bairro" << endl;
+            cout << "04. Editar Logradouro" << endl;
+            cout << "05. Editar Numero" << endl;
+            cout << "06. Editar CEP" << endl;
+            cout << "07. Editar Aluga ou Vende" << endl;
+            cout << "08. Preco do Aluguel" << endl;
+            cout << "09. Preco de Venda" << endl;
+            cout << "10. Numero de Pavimentos" << endl;
+            cout << "11. Numero de Quartos" << endl;
+            cout << "12. Area do Terreno" << endl;
+            cout << "13. Area Construida" << endl;
+            cout << "Digite a Opcao Desejada: ";
+            cin >> opcao;
+            cout << endl;
+
+            Casa casa(listaImoveis[id].getTipo());
+
+            string stream;
+            int numero;
+            float valor;
+            switch(opcao){
+                case 1:
+                    cout << "Novo Titulo: ";
+                    fflush(stdin);
+                    cin >> stream;
+                    cout << endl;
+                    listaImoveis[id].setTitulo(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 2:
+                    cout << "Nova Cidade: ";
+                    fflush(stdin);
+                    cin >> stream;
+                    cout << endl;
+                    listaImoveis[id].setCidade(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 3:
+                    cout << "Novo Bairro: ";
+                    fflush(stdin);
+                    cin >> stream;
+                    cout << endl;
+                    listaImoveis[id].setBairro(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 4:
+                    cout << "Novo Logradouro: ";
+                    fflush(stdin);
+                    cin >> stream;
+                    cout << endl;
+                    listaImoveis[id].setLogradouro(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 5:
+                    cout << "Novo Numero: ";
+                    fflush(stdin);
+                    cin >> stream;
+                    cout << endl;
+                    listaImoveis[id].setNumero(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 6:
+                    cout << "Novo CEP: ";
+                    fflush(stdin);
+                    cin >> stream;
+                    cout << endl;
+                    listaImoveis[id].setCep(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 7:
+                    cout << "0. Aluga 1. Vende: ";
+                    cin >> numero;
+                    cout << endl;
+                    listaImoveis[id].setAluga_vende(numero);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 8:
+                    cout << "Novo Valor do Aluguel: ";
+                    cin >> valor;
+                    cout << endl;
+                    listaImoveis[id].setPrecoAluguel(valor);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 9:
+                    cout << "Novo Valor de Venda: ";
+                    cin >> valor;
+                    cout << endl;
+                    listaImoveis[id].setPrecoVenda(valor);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 10:
+                    cout << "Numero de Pavimentos: ";
+                    cin >> numero;
+                    cout << endl;
+                    listaImoveis[id].setPavimentos(numero);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 11:
+                    cout << "Numero de Quartos: ";
+                    cin >> numero;
+                    cout << endl;
+                    listaImoveis[id].setQuartos(numero);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+            }
+    }
+
+}
+
+
+
 void menu(vector<Imovel> &listaImoveis){
     int opcao;
 
@@ -181,6 +306,7 @@ void menu(vector<Imovel> &listaImoveis){
     cout << "2. Listar Imovel" << endl;
     cout << "3. Buscar Imovel" << endl;
     cout << "4. Remover Imovel" << endl;
+    cout << "5. Editar Imovel" << endl;
     cout << "Escolha: ";
     cin >> opcao;
     cout << endl;
@@ -199,6 +325,10 @@ void menu(vector<Imovel> &listaImoveis){
 
         case 4:
             remover(listaImoveis);
+            break;
+
+        case 5:
+            editar(listaImoveis);
             break;
 
 
