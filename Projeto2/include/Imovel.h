@@ -19,6 +19,19 @@ class Imovel{
         float precoAluguel;
 
     public:
+        Imovel(){
+            this->tipo = -1;
+            this->titulo = "empty";
+            this->cidade = "empty";
+            this->bairro = "empty";
+            this->logradouro = "empty";
+            this->numero = "empty";
+            this->cep = "empty";
+            this->aluga_vende = -1;
+            this->precoVenda = -1;
+            this->precoAluguel = -1;
+        }
+
         Imovel(int tipo, string titulo, string cidade, string bairro, string logradouro,
         string numero, string cep, int aluga_vende, float precoVenda, float precoAluguel){
                 this->tipo = tipo;

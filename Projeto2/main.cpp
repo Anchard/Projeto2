@@ -13,6 +13,75 @@ string upperCase(string input) {
     return input;
 }
 
+void inserir(vector<Imovel> &listaImoveis){
+    int opcao;
+    cout << "Inserir: " << endl;
+    cout << "0. Casa" << endl;
+    cout << "1. Apartamento" << endl;
+    cout << "2. Terreno" << endl;
+    cout << "Escolha: ";
+    cin >> opcao;
+    cout << endl;
+
+    Casa casa;
+    char stream[100];
+    int numero;
+    float valor;
+    switch(opcao){
+        case 0:
+            cout << "Titulo" << endl;
+            cout << "Cidade" << endl;
+            cout << "Bairro" << endl;
+            cout << "Logradouro" << endl;
+            cout << "Numero" << endl;
+            cout << "CEP" << endl;
+            cout << "0. Aluga 1. Vende" << endl;
+            cout << "Preco do Aluguel" << endl;
+            cout << "Preco de Venda" << endl;
+            cout << "Numero de Pavimentos" << endl;
+            cout << "Numero de Quartos" << endl;
+            cout << "Area do Terreno" << endl;
+            cout << "Area Construida" << "\n\n";
+
+            casa.setTipo(0);
+            fflush(stdin);
+            scanf("%[^\n]s", &stream);
+            casa.setTitulo(stream);
+            fflush(stdin);
+            scanf("%[^\n]s", &stream);
+            casa.setCidade(stream);
+            fflush(stdin);
+            scanf("%[^\n]s", &stream);
+            casa.setBairro(stream);
+            fflush(stdin);
+            scanf("%[^\n]s", &stream);
+            casa.setLogradouro(stream);
+            fflush(stdin);
+            scanf("%[^\n]s", &stream);
+            casa.setNumero(stream);
+            fflush(stdin);
+            scanf("%[^\n]s", &stream);
+            casa.setCep(stream);
+            cin >> numero;
+            casa.setAluga_vende(numero);
+            cin >> valor;
+            casa.setPrecoAluguel(valor);
+            cin >> valor;
+            casa.setPrecoVenda(valor);
+            cin >> numero;
+            casa.setPavimentos(numero);
+            cin >> numero;
+            casa.setQuartos(numero);
+            cin >> valor;
+            casa.setAreaTerreno(valor);
+            cin >> valor;
+            casa.setAreaConstruida(valor);
+            cout << "\nCasa Adicionada com Sucesso!\n";
+
+            listaImoveis.push_back(casa);
+
+    }
+}
 void listar(vector<Imovel> listaImoveis){
     int opcao;
     int elementos = listaImoveis.size();
@@ -202,7 +271,9 @@ void editar(vector<Imovel> &listaImoveis){
             cin >> opcao;
             cout << endl;
 
-            Casa casa(listaImoveis[id].getTipo());
+            Casa casa;
+            casa.setTitulo("Que merda do carai");
+            casa.show();
 
             string stream;
             int numero;
@@ -281,14 +352,14 @@ void editar(vector<Imovel> &listaImoveis){
                     cout << "Numero de Pavimentos: ";
                     cin >> numero;
                     cout << endl;
-                    listaImoveis[id].setPavimentos(numero);
+                    //listaImoveis[id].setPavimentos(numero);
                     cout << "Alteracao Efetuada\n\n";
                     break;
                 case 11:
                     cout << "Numero de Quartos: ";
                     cin >> numero;
                     cout << endl;
-                    listaImoveis[id].setQuartos(numero);
+                    //listaImoveis[id].setQuartos(numero);
                     cout << "Alteracao Efetuada\n\n";
                     break;
             }
@@ -313,6 +384,7 @@ void menu(vector<Imovel> &listaImoveis){
 
     switch(opcao){
         case 1:
+            inserir(listaImoveis);
             break;
 
         case 2:

@@ -22,6 +22,23 @@ class Casa: public Imovel{
         float areaConstruida;
 
     public:
+        Casa(){
+            this->tipo = -1;
+            this->titulo = "empty";
+            this->cidade = "empty";
+            this->bairro = "empty";
+            this->logradouro = "empty";
+            this->numero = "empty";
+            this->cep = "empty";
+            this->aluga_vende = -1;
+            this->precoVenda = -1;
+            this->precoAluguel = -1;
+            this->pavimentos = -1;
+            this->quartos = -1;
+            this->areaTerreno = -1;
+            this->areaConstruida = -1;
+        }
+
         Casa(int tipo, string titulo, string cidade, string bairro, string logradouro,
         string numero, string cep, int aluga_vende, float precoVenda,
         float precoAluguel, int pavimentos, int quartos, float areaTerreno, float areaConstruida):
