@@ -2,18 +2,14 @@
 #define IMOVEL_H
 
 #include <string>
-
+#include "Endereco.h"
 using namespace std;
 
 class Imovel{
     private:
         int tipo;
         string titulo;
-        string cidade;
-        string bairro;
-        string logradouro;
-        string numero;
-        string cep;
+        Endereco endereco;
         int aluga_vende;
         float precoVenda;
         float precoAluguel;
@@ -22,11 +18,11 @@ class Imovel{
         Imovel(){
             this->tipo = -1;
             this->titulo = "empty";
-            this->cidade = "empty";
-            this->bairro = "empty";
-            this->logradouro = "empty";
-            this->numero = "empty";
-            this->cep = "empty";
+            this->endereco.cidade = "empty";
+            this->endereco.bairro = "empty";
+            this->endereco.logradouro = "empty";
+            this->endereco.numero = "empty";
+            this->endereco.cep = "empty";
             this->aluga_vende = -1;
             this->precoVenda = -1;
             this->precoAluguel = -1;
@@ -36,15 +32,15 @@ class Imovel{
         string numero, string cep, int aluga_vende, float precoVenda, float precoAluguel){
                 this->tipo = tipo;
                 this->titulo = titulo;
-                this->cidade = cidade;
-                this->bairro = bairro;
-                this->logradouro = logradouro;
-                this->numero = numero;
-                this->cep = cep;
+                this->endereco.cidade = cidade;
+                this->endereco.bairro = bairro;
+                this->endereco.logradouro = logradouro;
+                this->endereco.numero = numero;
+                this->endereco.cep = cep;
                 this->aluga_vende = aluga_vende;
                 this->precoVenda = precoVenda;
                 this->precoAluguel = precoAluguel;
-               }
+        }
 
         void setTipo(int tipo);
         void setTitulo(string titulo);

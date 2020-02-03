@@ -10,19 +10,19 @@ void Imovel::setTitulo(string titulo){
     this->titulo = titulo;
 }
 void Imovel::setCidade(string cidade){
-    this->cidade = cidade;
+    this->endereco.cidade = cidade;
 }
 void Imovel::setBairro(string bairro){
-    this->bairro = bairro;
+    this->endereco.bairro = bairro;
 }
 void Imovel::setLogradouro(string logradouro){
-    this->logradouro = logradouro;
+    this->endereco.logradouro = logradouro;
 }
 void Imovel::setNumero(string numero){
-    this->numero = numero;
+    this->endereco.numero = numero;
 }
 void Imovel::setCep(string cep){
-    this->cep = cep;
+    this->endereco.cep = cep;
 }
 void Imovel::setAluga_vende(int aluga_vende){
     this->aluga_vende = aluga_vende;
@@ -41,19 +41,19 @@ string Imovel::getTitulo(){
     return this->titulo;
 }
 string Imovel::getCidade(){
-    return this->cidade;
+    return this->endereco.cidade;
 }
 string Imovel::getBairro(){
-    return this->bairro;
+    return this->endereco.bairro;
 }
 string Imovel::getLogradouro(){
-    return this->logradouro;
+    return this->endereco.logradouro;
 }
 string Imovel::getNumero(){
-    return this->numero;
+    return this->endereco.numero;
 }
 string Imovel::getCep(){
-    return this->cep;
+    return this->endereco.cep;
 }
 int Imovel::getAluga_vende(){
     return this->aluga_vende;
@@ -68,11 +68,11 @@ float Imovel::getPrecoAluguel(){
 void Imovel::show(){
     cout << "Tipo - Casa? (0) Apartamento? (1) Terreno? (2): " << this->tipo << endl;
     cout << "Titulo: " << this->titulo << endl;
-    cout << "Cidade: " << this->cidade << endl;
-    cout << "Bairro: " << this->bairro << endl;
-    cout << "Logradouro: " << this->logradouro << endl;
-    cout << "Numero: " << this->numero << endl;
-    cout << "Cep: " << this->cep << endl;
+    cout << "Cidade: " << this->getCidade() << endl;
+    cout << "Bairro: " << this->getBairro() << endl;
+    cout << "Logradouro: " << this->getLogradouro() << endl;
+    cout << "Numero: " << this->getNumero() << endl;
+    cout << "Cep: " << this->getCep() << endl;
     cout << "Aluga? (0) Vende? (1): " << this->aluga_vende << endl;
     cout << "Preco de Venda: R$ " << this->precoVenda << endl;
     cout << "Preco do Aluguel: R$ " << this->precoAluguel << "\n\n";

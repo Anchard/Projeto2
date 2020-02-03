@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 #include "Imovel.h"
 #include "Casa.h"
 #include "Apartamento.h"
@@ -7,13 +8,22 @@
 
 using namespace std;
 
+void showType(vector<Imovel*> listaImoveis, int i){
+    if(listaImoveis[i]->getTipo() == 0)
+        ((Casa*)listaImoveis[i])->show();
+    else if(listaImoveis[i]->getTipo() == 1)
+        ((Apartamento*)listaImoveis[i])->show();
+    else if(listaImoveis[i]->getTipo() == 2)
+        listaImoveis[i]->show();
+}
+
 string upperCase(string input) {
     for (string::iterator it = input.begin(); it != input.end(); ++ it)
         *it = toupper((unsigned char)*it);
     return input;
 }
 
-void inserir(vector<Imovel> &listaImoveis){
+void inserir(vector<Imovel*> &listaImoveis){
     int opcao;
     cout << "Inserir: " << endl;
     cout << "0. Casa" << endl;
@@ -23,10 +33,10 @@ void inserir(vector<Imovel> &listaImoveis){
     cin >> opcao;
     cout << endl;
 
-    Casa casa;
-    char stream[100];
+    string stream;
     int numero;
     float valor;
+    Casa casa;
     switch(opcao){
         case 0:
             cout << "Titulo" << endl;
@@ -45,22 +55,22 @@ void inserir(vector<Imovel> &listaImoveis){
 
             casa.setTipo(0);
             fflush(stdin);
-            scanf("%[^\n]s", &stream);
+            getline(cin, stream);
             casa.setTitulo(stream);
             fflush(stdin);
-            scanf("%[^\n]s", &stream);
+            getline(cin, stream);
             casa.setCidade(stream);
             fflush(stdin);
-            scanf("%[^\n]s", &stream);
+            getline(cin, stream);
             casa.setBairro(stream);
             fflush(stdin);
-            scanf("%[^\n]s", &stream);
+            getline(cin, stream);
             casa.setLogradouro(stream);
             fflush(stdin);
-            scanf("%[^\n]s", &stream);
+            getline(cin, stream);
             casa.setNumero(stream);
             fflush(stdin);
-            scanf("%[^\n]s", &stream);
+            getline(cin, stream);
             casa.setCep(stream);
             cin >> numero;
             casa.setAluga_vende(numero);
@@ -76,13 +86,15 @@ void inserir(vector<Imovel> &listaImoveis){
             casa.setAreaTerreno(valor);
             cin >> valor;
             casa.setAreaConstruida(valor);
-            cout << "\nCasa Adicionada com Sucesso!\n";
+            cout << "\nCasa Adicionada com Sucesso!\n\n";
 
-            listaImoveis.push_back(casa);
+            listaImoveis.push_back(&casa);
+
+            break;
 
     }
 }
-void listar(vector<Imovel> listaImoveis){
+void listar(vector<Imovel*> listaImoveis){
     int opcao;
     int elementos = listaImoveis.size();
 
@@ -97,11 +109,11 @@ void listar(vector<Imovel> listaImoveis){
     switch(opcao){
         case 1:
             for(int i = 0; i < elementos; i++){
-                cout << "Titulo: " << listaImoveis[i].getTitulo() << endl;
-                cout << "Cidade: " << listaImoveis[i].getCidade() << endl;
-                cout << "Bairro: " << listaImoveis[i].getBairro() << endl;
-                cout << "Preco de Venda: R$ " << listaImoveis[i].getPrecoVenda() << endl;
-                cout << "Preco do Aluguel: R$ " << listaImoveis[i].getPrecoAluguel() << "\n\n";
+                cout << "Titulo: " << listaImoveis[i]->getTitulo() << endl;
+                cout << "Cidade: " << listaImoveis[i]->getCidade() << endl;
+                cout << "Bairro: " << listaImoveis[i]->getBairro() << endl;
+                cout << "Preco de Venda: R$ " << listaImoveis[i]->getPrecoVenda() << endl;
+                cout << "Preco do Aluguel: R$ " << listaImoveis[i]->getPrecoAluguel() << "\n\n";
             }
 
             break;
@@ -117,8 +129,8 @@ void listar(vector<Imovel> listaImoveis){
             cout << endl;
 
             for(int i = 0; i < elementos; i++){
-                if(opcao == listaImoveis[i].getTipo())
-                    listaImoveis[i].show();
+                if(opcao == listaImoveis[i]->getTipo())
+                    showType(listaImoveis, i);
             }
 
             break;
@@ -132,15 +144,15 @@ void listar(vector<Imovel> listaImoveis){
             cout << endl;
 
             for(int i = 0; i < elementos; i++){
-                if(opcao == listaImoveis[i].getAluga_vende())
-                    listaImoveis[i].show();
+                if(opcao == listaImoveis[i]->getAluga_vende())
+                    showType(listaImoveis, i);
             }
 
             break;
     }
 }
 
-void buscar(vector<Imovel> listaImoveis){
+void buscar(vector<Imovel*> listaImoveis){
     int opcao;
     int elementos = listaImoveis.size();
 
@@ -160,14 +172,15 @@ void buscar(vector<Imovel> listaImoveis){
         case 1:
             cout << "Digite o nome da Cidade: ";
             fflush(stdin);
-            cin >> target;
+            getline(cin, target);
             fflush(stdin);
             cout << endl;
 
             for(int i = 0; i < elementos; i++){
-                if(upperCase(listaImoveis[i].getCidade()).find(upperCase(target)) != string::npos )
+                if(upperCase(listaImoveis[i]->getCidade()).find(upperCase(target)) != string::npos){
                     cout << "ID: " << i << endl;
-                    listaImoveis[i].show();
+                    showType(listaImoveis, i);
+                }
             }
 
             break;
@@ -175,14 +188,15 @@ void buscar(vector<Imovel> listaImoveis){
         case 2:
             cout << "Digite o nome do Bairro: ";
             fflush(stdin);
-            cin >> target;
+            getline(cin, target);
             fflush(stdin);
             cout << endl;
 
             for(int i = 0; i < elementos; i++){
-                if(upperCase(listaImoveis[i].getBairro()).find(upperCase(target)) != string::npos )
+                if(upperCase(listaImoveis[i]->getBairro()).find(upperCase(target)) != string::npos){
                     cout << "ID: " << i << endl;
-                    listaImoveis[i].show();
+                    showType(listaImoveis, i);
+                }
             }
 
             break;
@@ -190,14 +204,15 @@ void buscar(vector<Imovel> listaImoveis){
          case 3:
             cout << "Digite o Titulo: ";
             fflush(stdin);
-            cin >> target;
+            getline(cin, target);
             fflush(stdin);
             cout << endl;
 
             for(int i = 0; i < elementos; i++){
-                if(upperCase(listaImoveis[i].getTitulo()).find(upperCase(target)) != string::npos )
+                if(upperCase(listaImoveis[i]->getTitulo()).find(upperCase(target)) != string::npos){
                     cout << "ID: " << i << endl;
-                    listaImoveis[i].show();
+                    showType(listaImoveis, i);
+                }
             }
 
             break;
@@ -208,9 +223,10 @@ void buscar(vector<Imovel> listaImoveis){
             cout << endl;
 
             for(int i = 0; i < elementos; i++){
-                if(listaImoveis[i].getPrecoAluguel() <= valor && listaImoveis[i].getPrecoAluguel() > 0)
+                if(listaImoveis[i]->getPrecoAluguel() <= valor && listaImoveis[i]->getPrecoAluguel() > 0){
                     cout << "ID: " << i << endl;
-                    listaImoveis[i].show();
+                    listaImoveis[i]->show();
+                }
             }
 
             break;
@@ -221,16 +237,17 @@ void buscar(vector<Imovel> listaImoveis){
             cout << endl;
 
             for(int i = 0; i < elementos; i++){
-                if(listaImoveis[i].getPrecoVenda() <= valor && listaImoveis[i].getPrecoVenda() > 0)
+                if(listaImoveis[i]->getPrecoVenda() <= valor && listaImoveis[i]->getPrecoVenda() > 0){
                     cout << "ID: " << i << endl;
-                    listaImoveis[i].show();
+                    listaImoveis[i]->show();
+                }
             }
 
             break;
     }
 }
 
-void remover(vector<Imovel> &listaImoveis){
+void remover(vector<Imovel*> &listaImoveis){
     int id;
 
     buscar(listaImoveis);
@@ -242,7 +259,7 @@ void remover(vector<Imovel> &listaImoveis){
     cout << "Elemento Removido!" << "\n\n";
 }
 
-void editar(vector<Imovel> &listaImoveis){
+void editar(vector<Imovel*> &listaImoveis){
     int id;
 
     buscar(listaImoveis);
@@ -250,7 +267,7 @@ void editar(vector<Imovel> &listaImoveis){
     cin >> id;
     cout << endl;
 
-    switch(listaImoveis[id].getTipo()){
+    switch(listaImoveis[id]->getTipo()){
         case 0:
             int opcao;
 
@@ -271,10 +288,6 @@ void editar(vector<Imovel> &listaImoveis){
             cin >> opcao;
             cout << endl;
 
-            Casa casa;
-            casa.setTitulo("Que merda do carai");
-            casa.show();
-
             string stream;
             int numero;
             float valor;
@@ -284,7 +297,7 @@ void editar(vector<Imovel> &listaImoveis){
                     fflush(stdin);
                     cin >> stream;
                     cout << endl;
-                    listaImoveis[id].setTitulo(stream);
+                    listaImoveis[id]->setTitulo(stream);
                     cout << "Alteracao Efetuada\n\n";
                     break;
                 case 2:
@@ -292,7 +305,7 @@ void editar(vector<Imovel> &listaImoveis){
                     fflush(stdin);
                     cin >> stream;
                     cout << endl;
-                    listaImoveis[id].setCidade(stream);
+                    listaImoveis[id]->setCidade(stream);
                     cout << "Alteracao Efetuada\n\n";
                     break;
                 case 3:
@@ -300,7 +313,7 @@ void editar(vector<Imovel> &listaImoveis){
                     fflush(stdin);
                     cin >> stream;
                     cout << endl;
-                    listaImoveis[id].setBairro(stream);
+                    listaImoveis[id]->setBairro(stream);
                     cout << "Alteracao Efetuada\n\n";
                     break;
                 case 4:
@@ -308,7 +321,7 @@ void editar(vector<Imovel> &listaImoveis){
                     fflush(stdin);
                     cin >> stream;
                     cout << endl;
-                    listaImoveis[id].setLogradouro(stream);
+                    listaImoveis[id]->setLogradouro(stream);
                     cout << "Alteracao Efetuada\n\n";
                     break;
                 case 5:
@@ -316,7 +329,7 @@ void editar(vector<Imovel> &listaImoveis){
                     fflush(stdin);
                     cin >> stream;
                     cout << endl;
-                    listaImoveis[id].setNumero(stream);
+                    listaImoveis[id]->setNumero(stream);
                     cout << "Alteracao Efetuada\n\n";
                     break;
                 case 6:
@@ -324,42 +337,42 @@ void editar(vector<Imovel> &listaImoveis){
                     fflush(stdin);
                     cin >> stream;
                     cout << endl;
-                    listaImoveis[id].setCep(stream);
+                    listaImoveis[id]->setCep(stream);
                     cout << "Alteracao Efetuada\n\n";
                     break;
                 case 7:
                     cout << "0. Aluga 1. Vende: ";
                     cin >> numero;
                     cout << endl;
-                    listaImoveis[id].setAluga_vende(numero);
+                    listaImoveis[id]->setAluga_vende(numero);
                     cout << "Alteracao Efetuada\n\n";
                     break;
                 case 8:
                     cout << "Novo Valor do Aluguel: ";
                     cin >> valor;
                     cout << endl;
-                    listaImoveis[id].setPrecoAluguel(valor);
+                    listaImoveis[id]->setPrecoAluguel(valor);
                     cout << "Alteracao Efetuada\n\n";
                     break;
                 case 9:
                     cout << "Novo Valor de Venda: ";
                     cin >> valor;
                     cout << endl;
-                    listaImoveis[id].setPrecoVenda(valor);
+                    listaImoveis[id]->setPrecoVenda(valor);
                     cout << "Alteracao Efetuada\n\n";
                     break;
                 case 10:
                     cout << "Numero de Pavimentos: ";
                     cin >> numero;
                     cout << endl;
-                    //listaImoveis[id].setPavimentos(numero);
+                    ((Casa*)listaImoveis[id])->setPavimentos(numero);
                     cout << "Alteracao Efetuada\n\n";
                     break;
                 case 11:
                     cout << "Numero de Quartos: ";
                     cin >> numero;
                     cout << endl;
-                    //listaImoveis[id].setQuartos(numero);
+                    ((Casa*)listaImoveis[id])->setQuartos(numero);
                     cout << "Alteracao Efetuada\n\n";
                     break;
             }
@@ -369,7 +382,7 @@ void editar(vector<Imovel> &listaImoveis){
 
 
 
-void menu(vector<Imovel> &listaImoveis){
+void menu(vector<Imovel*> &listaImoveis){
     int opcao;
 
     cout << "Qual Operacao Deseja Realizar?" << endl;
@@ -410,12 +423,13 @@ void menu(vector<Imovel> &listaImoveis){
 }
 
 int main(){
-    vector<Imovel> listaImoveis;
+    vector<Imovel*> listaImoveis;
+    listaImoveis.reserve(30);
 
     Imovel imovel(2, "Terreno Legal em Mangabeira", "Joao Pessoa", "Mangabeira", "Estudante Marizete",
                   "246", "58058-300", 0, -1, 520.24);
 
-    listaImoveis.push_back(imovel);
+    listaImoveis.push_back(&imovel);
     //imovel.show();
 
     Casa casa(0, "Casa Bonita na Torre", "Joao Pessoa", "Torre", "Geminiano da Franca", "231", "58040-560", 1,
@@ -425,14 +439,15 @@ int main(){
     casa.setPrecoAluguel(370.44);
     casa.setPrecoVenda(-1);
     casa.setPavimentos(2);
+    casa.setCidade("Cabedelo");
 
-    listaImoveis.push_back(casa);
+    listaImoveis.push_back(&casa);
     //casa.show();
 
     Apartamento ap(1, "Apartamento Luxuoso", "Joao Pessoa", "Manaira", "Rua da Soberba", "621", "58058-621",
                    1, 950000, -1, 350, 5, "Nascente do Poente", 7, 932.47, 2);
 
-    listaImoveis.push_back(ap);
+    listaImoveis.push_back(&ap);
     //ap.show();
 
     while(true)
