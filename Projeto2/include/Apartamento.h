@@ -6,7 +6,7 @@
 
 class Apartamento: public Imovel{
     private:
-        int tipo;
+        string tipo;
         string titulo;
         Endereco endereco;
         string aluga_vende;
@@ -22,7 +22,7 @@ class Apartamento: public Imovel{
 
     public:
         Apartamento(){
-            this->tipo = 1;
+            this->tipo = "i001";
             this->titulo = "empty";
             this->endereco.cidade = "empty";
             this->endereco.bairro = "empty";
@@ -40,7 +40,7 @@ class Apartamento: public Imovel{
             this->garagem = -1;
         }
 
-        Apartamento(int tipo, string titulo, string cidade, string bairro, string logradouro,
+        Apartamento(string tipo, string titulo, string cidade, string bairro, string logradouro,
         string numero, string cep, int aluga_vende, float precoVenda, float precoAluguel, float area,
         int quartos, string posicao, int andar, float condominio, int garagem):
         Imovel(tipo, titulo, cidade, bairro, logradouro, numero, cep, aluga_vende, precoVenda, precoAluguel){

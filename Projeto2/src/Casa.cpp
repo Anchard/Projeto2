@@ -30,7 +30,7 @@ float Casa::getAreaConstruida(){
 }
 
 void Casa::show(){
-    cout << "Tipo - Casa? (0) Apartamento? (1) Terreno? (2): " << this->getTipo() << endl;
+    cout << "Tipo - Casa? (i000) Apartamento? (i001) Terreno? (i002): " << this->getTipo() << endl;
     cout << "Titulo: " << this->getTitulo() << endl;
     cout << "Cidade: " << this->getCidade() << endl;
     cout << "Bairro: " << this->getBairro() << endl;

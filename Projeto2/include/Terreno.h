@@ -9,7 +9,7 @@ using namespace std;
 
 class Terreno: public Imovel{
     private:
-        int tipo;
+        string tipo;
         string titulo;
         Endereco endereco;
         int aluga_vende;
@@ -20,7 +20,7 @@ class Terreno: public Imovel{
 
     public:
         Terreno(){
-            this->tipo = 2;
+            this->tipo = "i002";
             this->titulo = "empty";
             this->endereco.cidade = "empty";
             this->endereco.bairro = "empty";
@@ -33,7 +33,7 @@ class Terreno: public Imovel{
             this->areaTerreno = -1;
         }
 
-        Terreno(int tipo, string titulo, string cidade, string bairro, string logradouro,
+        Terreno(string tipo, string titulo, string cidade, string bairro, string logradouro,
         string numero, string cep, int aluga_vende, float precoVenda,
         float precoAluguel, float areaTerreno):
         Imovel(tipo, titulo, cidade, bairro, logradouro, numero, cep, aluga_vende, precoVenda, precoAluguel){

@@ -1,4 +1,4 @@
-2
+i002
 Terreno Legal em Mangabeira
 Joao Pessoa
 Mangabeira
@@ -9,9 +9,9 @@ Estudante Marizete
 -1
 520.24
 250
-0
+i000
 Casa Bonita na Torre
-Cabedelo
+Joao Pessoa
 Torre
 Geminiano da Franca
 231
@@ -23,7 +23,7 @@ Geminiano da Franca
 3
 320.42
 280
-1
+i001
 Apartamento Luxuoso
 Joao Pessoa
 Manaira

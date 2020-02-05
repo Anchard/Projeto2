@@ -42,7 +42,7 @@ int Apartamento::getGaragem(){
 }
 
 void Apartamento::show(){
-    cout << "Tipo - Casa? (0) Apartamento? (1) Terreno? (2): " << this->getTipo() << endl;
+    cout << "Tipo - Casa? (i000) Apartamento? (i001) Terreno? (i002): " << this->getTipo() << endl;
     cout << "Titulo: " << this->getTitulo() << endl;
     cout << "Cidade: " << this->getCidade() << endl;
     cout << "Bairro: " << this->getBairro() << endl;
@@ -52,10 +52,10 @@ void Apartamento::show(){
     cout << "Aluga? (0) Vende? (1): " << this->getAluga_vende() << endl;
     cout << "Preco de Venda: R$ " << this->getPrecoVenda() << endl;
     cout << "Preco do Aluguel: R$ " << this->getPrecoAluguel() << endl;
-    cout << "Area: " << this->area << " m2\n";
-    cout << "Numero de Quartos: " << this->quartos << endl;
-    cout << "Posicao: " << this->posicao << endl;
-    cout << "Andar: " << this->andar << endl;
-    cout << "Condominio: R$ " << this->condominio << endl;
-    cout << "Vagas na Garagem: " << this->garagem << "\n\n";
+    cout << "Area: " << this->getArea() << " m2\n";
+    cout << "Numero de Quartos: " << this->getQuartos() << endl;
+    cout << "Posicao: " << this->getPosicao() << endl;
+    cout << "Andar: " << this->getAndar() << endl;
+    cout << "Condominio: R$ " << this->getCondominio() << endl;
+    cout << "Vagas na Garagem: " << this->getGaragem() << "\n\n";
 }

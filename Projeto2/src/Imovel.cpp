@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void Imovel::setTipo(int tipo){
+void Imovel::setTipo(string tipo){
     this->tipo = tipo;
 }
 void Imovel::setTitulo(string titulo){
@@ -34,7 +34,7 @@ void Imovel::setPrecoAluguel(float precoAluguel){
     this->precoAluguel = precoAluguel;
 }
 
-int Imovel::getTipo(){
+string Imovel::getTipo(){
     return this->tipo;
 }
 string Imovel::getTitulo(){
@@ -66,7 +66,7 @@ float Imovel::getPrecoAluguel(){
 }
 
 void Imovel::show(){
-    cout << "Tipo - Casa? (0) Apartamento? (1) Terreno? (2): " << this->tipo << endl;
+    cout << "Tipo - Casa? (000) Apartamento? (001) Terreno? (002): " << this->tipo << endl;
     cout << "Titulo: " << this->titulo << endl;
     cout << "Cidade: " << this->getCidade() << endl;
     cout << "Bairro: " << this->getBairro() << endl;

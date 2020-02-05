@@ -7,7 +7,7 @@ using namespace std;
 
 class Imovel{
     private:
-        int tipo;
+        string tipo;
         string titulo;
         Endereco endereco;
         int aluga_vende;
@@ -16,7 +16,7 @@ class Imovel{
 
     public:
         Imovel(){
-            this->tipo = -1;
+            this->tipo = "i-1";
             this->titulo = "empty";
             this->endereco.cidade = "empty";
             this->endereco.bairro = "empty";
@@ -28,7 +28,7 @@ class Imovel{
             this->precoAluguel = -1;
         }
 
-        Imovel(int tipo, string titulo, string cidade, string bairro, string logradouro,
+        Imovel(string tipo, string titulo, string cidade, string bairro, string logradouro,
         string numero, string cep, int aluga_vende, float precoVenda, float precoAluguel){
                 this->tipo = tipo;
                 this->titulo = titulo;
@@ -42,7 +42,7 @@ class Imovel{
                 this->precoAluguel = precoAluguel;
         }
 
-        void setTipo(int tipo);
+        void setTipo(string tipo);
         void setTitulo(string titulo);
         void setCidade(string cidade);
         void setBairro(string bairro);
@@ -53,7 +53,7 @@ class Imovel{
         void setPrecoVenda(float precoVenda);
         void setPrecoAluguel(float precoAluguel);
 
-        int getTipo();
+        string getTipo();
         string getTitulo();
         string getCidade();
         string getBairro();

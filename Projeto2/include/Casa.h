@@ -6,7 +6,7 @@
 
 class Casa: public Imovel{
     private:
-        int tipo;
+        string tipo;
         string titulo;
         Endereco endereco;
         int aluga_vende;
@@ -20,7 +20,7 @@ class Casa: public Imovel{
 
     public:
         Casa(){
-            this->tipo = 0;
+            this->tipo = "i000";
             this->titulo = "empty";
             this->endereco.cidade = "empty";
             this->endereco.bairro = "empty";
@@ -36,7 +36,7 @@ class Casa: public Imovel{
             this->areaConstruida = -1;
         }
 
-        Casa(int tipo, string titulo, string cidade, string bairro, string logradouro,
+        Casa(string tipo, string titulo, string cidade, string bairro, string logradouro,
         string numero, string cep, int aluga_vende, float precoVenda,
         float precoAluguel, int pavimentos, int quartos, float areaTerreno, float areaConstruida):
         Imovel(tipo, titulo, cidade, bairro, logradouro, numero, cep, aluga_vende, precoVenda, precoAluguel){

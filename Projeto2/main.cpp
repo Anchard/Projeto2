@@ -11,11 +11,11 @@
 using namespace std;
 
 void showType(vector<Imovel*> listaImoveis, int i){
-    if(listaImoveis[i]->getTipo() == 0)
+    if(listaImoveis[i]->getTipo() == "i000")
         ((Casa*)listaImoveis[i])->show();
-    else if(listaImoveis[i]->getTipo() == 1)
+    else if(listaImoveis[i]->getTipo() == "i001")
         ((Apartamento*)listaImoveis[i])->show();
-    else if(listaImoveis[i]->getTipo() == 2)
+    else if(listaImoveis[i]->getTipo() == "i002")
         ((Terreno*)listaImoveis[i])->show();
 }
 
@@ -35,7 +35,7 @@ void salvaArquivo(vector<Imovel*> listaImoveis) {
         return ;
     }
     for (int i = 0; i < tam; i++){
-        if(listaImoveis[i]->getTipo() == 0){
+        if(listaImoveis[i]->getTipo() == "i000"){
             file << listaImoveis[i]->getTipo() << endl;
             file << listaImoveis[i]->getTitulo() << endl;
             file << listaImoveis[i]->getCidade() << endl;
@@ -52,7 +52,7 @@ void salvaArquivo(vector<Imovel*> listaImoveis) {
             file << ((Casa*) listaImoveis[i])->getAreaConstruida() << endl;
         }
 
-        else if(listaImoveis[i]->getTipo() == 1){
+        else if(listaImoveis[i]->getTipo() == "i001"){
             file << listaImoveis[i]->getTipo() << endl;
             file << listaImoveis[i]->getTitulo() << endl;
             file << listaImoveis[i]->getCidade() << endl;
@@ -71,7 +71,7 @@ void salvaArquivo(vector<Imovel*> listaImoveis) {
             file << ((Apartamento*) listaImoveis[i])->getGaragem() << endl;
         }
 
-        else if(listaImoveis[i]->getTipo() == 2){
+        else if(listaImoveis[i]->getTipo() == "i002"){
             file << listaImoveis[i]->getTipo() << endl;
             file << listaImoveis[i]->getTitulo() << endl;
             file << listaImoveis[i]->getCidade() << endl;
@@ -88,6 +88,144 @@ void salvaArquivo(vector<Imovel*> listaImoveis) {
 
     cout << "Arquivo Salvo!\n\n";
     file.close();
+}
+
+void lerArquivo(vector<Imovel*> &listaImoveis){
+    ifstream file;
+    string stream;
+    int numero;
+    float valor;
+    Casa* casa = new Casa();
+    Apartamento* ap = new Apartamento();
+    Terreno* terreno = new Terreno();
+
+    file.open("dados.txt");
+    if (!file.is_open()) {
+        cout << "Nao foi possivel abrir o arquivo para leitura" << endl;
+        return;
+    }
+    while(1){
+        getline(file, stream);
+        if(stream == "i000"){
+            casa->setTipo(stream);
+            getline(file, stream);
+            casa->setTitulo(stream);
+            getline(file, stream);
+            casa->setCidade(stream);
+            getline(file, stream);
+            casa->setBairro(stream);
+            getline(file, stream);
+            casa->setLogradouro(stream);
+            getline(file, stream);
+            casa->setNumero(stream);
+            getline(file, stream);
+            casa->setCep(stream);
+            file >> numero;
+            file.ignore();
+            casa->setAluga_vende(numero);
+            file >> valor;
+            file.ignore();
+            casa->setPrecoVenda(valor);
+            file >> valor;
+            file.ignore();
+            casa->setPrecoAluguel(valor);
+            file >> numero;
+            file.ignore();
+            casa->setPavimentos(numero);
+            file >> numero;
+            file.ignore();
+            casa->setQuartos(numero);
+            file >> valor;
+            file.ignore();
+            casa->setAreaTerreno(valor);
+            file >> valor;
+            file.ignore();
+            casa->setAreaConstruida(valor);
+
+            listaImoveis.push_back(casa);
+        }
+
+        else if(stream == "i001"){
+            ap->setTipo(stream);
+            getline(file, stream);
+            ap->setTitulo(stream);
+            getline(file, stream);
+            ap->setCidade(stream);
+            getline(file, stream);
+            ap->setBairro(stream);
+            getline(file, stream);
+            ap->setLogradouro(stream);
+            getline(file, stream);
+            ap->setNumero(stream);
+            getline(file, stream);
+            ap->setCep(stream);
+            file >> numero;
+            file.ignore();
+            ap->setAluga_vende(numero);
+            file >> valor;
+            file.ignore();
+            ap->setPrecoVenda(valor);
+            file >> valor;
+            file.ignore();
+            ap->setPrecoAluguel(valor);
+            file >> valor;
+            file.ignore();
+            ap->setArea(valor);
+            file >> numero;
+            file.ignore();
+            ap->setQuartos(numero);
+            getline(file, stream);
+            ap->setPosicao(stream);
+            file >> numero;
+            file.ignore();
+            ap->setAndar(numero);
+            file >> valor;
+            file.ignore();
+            ap->setCondominio(valor);
+            file >> numero;
+            file.ignore();
+            ap->setGaragem(numero);
+
+            listaImoveis.push_back(ap);
+        }
+
+        else if(stream == "i002"){
+            terreno->setTipo(stream);
+            getline(file, stream);
+            terreno->setTitulo(stream);
+            getline(file, stream);
+            terreno->setCidade(stream);
+            getline(file, stream);
+            terreno->setBairro(stream);
+            getline(file, stream);
+            terreno->setLogradouro(stream);
+            getline(file, stream);
+            terreno->setNumero(stream);
+            getline(file, stream);
+            terreno->setCep(stream);
+            file >> numero;
+            file.ignore();
+            terreno->setAluga_vende(numero);
+            file >> valor;
+            file.ignore();
+            terreno->setPrecoVenda(valor);
+            file >> valor;
+            file.ignore();
+            terreno->setPrecoAluguel(valor);
+            file >> valor;
+            file.ignore();
+            terreno->setAreaTerreno(valor);
+
+            listaImoveis.push_back(terreno);
+        }
+        if (file.eof() || file.bad() || file.fail())
+            break;
+    }
+
+
+    file.close();
+
+    cout << "Imoveis Carregados!\n\n";
 }
 
 void inserir(vector<Imovel*> &listaImoveis){
@@ -177,7 +315,7 @@ void inserir(vector<Imovel*> &listaImoveis){
             cout << "-> Preco do Condominio" << endl;
             cout << "-> Vagas na Garagem" << "\n\n";
 
-            ap->setTipo(1);
+            ap->setTipo("i001");
             fflush(stdin);
             getline(cin, stream);
             ap->setTitulo(stream);
@@ -232,7 +370,7 @@ void inserir(vector<Imovel*> &listaImoveis){
             cout << "-> Preco do Aluguel" << endl;
             cout << "-> Area do Terreno" << "\n\n";
 
-            terreno->setTipo(2);
+            terreno->setTipo("i002");
             fflush(stdin);
             getline(cin, stream);
             terreno->setTitulo(stream);
@@ -277,6 +415,7 @@ void listar(vector<Imovel*> listaImoveis){
     cin >> opcao;
     cout << endl;
 
+    string seletor;
     switch(opcao){
         case 1:
             for(int i = 0; i < elementos; i++){
@@ -290,17 +429,16 @@ void listar(vector<Imovel*> listaImoveis){
             break;
 
         case 2:
-            int opcao;
             cout << "Qual Tipo Deseja Pesquisar?" << endl;
-            cout << "0. Casa" << endl;
-            cout << "1. Apartamento" << endl;
-            cout << "2. Terreno" << endl;
+            cout << "i000. Casa" << endl;
+            cout << "i001. Apartamento" << endl;
+            cout << "i002. Terreno" << endl;
             cout << "Escolha: ";
-            cin >> opcao;
+            cin >> seletor;
             cout << endl;
 
             for(int i = 0; i < elementos; i++){
-                if(opcao == listaImoveis[i]->getTipo())
+                if(seletor == listaImoveis[i]->getTipo())
                     showType(listaImoveis, i);
             }
 
@@ -442,7 +580,15 @@ void editar(vector<Imovel*> &listaImoveis){
     cin >> id;
     cout << endl;
 
-    switch(listaImoveis[id]->getTipo()){
+    int caso = -1;
+    if(listaImoveis[id]->getTipo() == "i000")
+        caso = 0;
+    else if(listaImoveis[id]->getTipo() == "i001")
+        caso = 1;
+    if(listaImoveis[id]->getTipo() == "i002")
+        caso = 2;
+
+    switch(caso){
         case 0:
             cout << "01. Editar Titulo" << endl;
             cout << "02. Editar Cidade" << endl;
@@ -812,7 +958,7 @@ int menu(vector<Imovel*> &listaImoveis){
     cout << "3. Buscar Imovel" << endl;
     cout << "4. Remover Imovel" << endl;
     cout << "5. Editar Imovel" << endl;
-    cout << "7. Sair/Salvar em Arquivo" << endl;
+    cout << "6. Sair/Salvar em Arquivo" << endl;
     cout << "Escolha: ";
     cin >> opcao;
     cout << endl;
@@ -838,7 +984,11 @@ int menu(vector<Imovel*> &listaImoveis){
             editar(listaImoveis);
             break;
 
-        case 7:
+        //case 7:
+            //lerArquivo(listaImoveis);
+            //break;
+
+        case 6:
             salvaArquivo(listaImoveis);
             flag = 0;
             break;
@@ -850,13 +1000,12 @@ int main(){
     vector<Imovel*> listaImoveis;
     int flag = 1;
 
-    Terreno terreno(2, "Terreno Legal em Mangabeira", "Joao Pessoa", "Mangabeira", "Estudante Marizete",
+    Terreno terreno("i002", "Terreno Legal em Mangabeira", "Joao Pessoa", "Mangabeira", "Estudante Marizete",
                   "246", "58058-300", 0, -1, 520.24, 250);
 
-    listaImoveis.push_back(&terreno);
     //imovel.show();
 
-    Casa casa(0, "Casa Bonita na Torre", "Joao Pessoa", "Torre", "Geminiano da Franca", "231", "58040-560", 1,
+    Casa casa("i000", "Casa Bonita na Torre", "Joao Pessoa", "Torre", "Geminiano da Franca", "231", "58040-560", 1,
               300000.78, -1, 1, 3, 320.42, 280.00);
 
     casa.setAluga_vende(0);
@@ -864,15 +1013,18 @@ int main(){
     casa.setPrecoVenda(-1);
     casa.setPavimentos(2);
 
-    listaImoveis.push_back(&casa);
+
     //casa.show();
 
-    Apartamento ap(1, "Apartamento Luxuoso", "Joao Pessoa", "Manaira", "Rua da Soberba", "621", "58058-621",
+    Apartamento ap("i001", "Apartamento Luxuoso", "Joao Pessoa", "Manaira", "Rua da Soberba", "621", "58058-621",
                    1, 950000, -1, 350, 5, "Nascente do Poente", 7, 932.47, 2);
 
-    listaImoveis.push_back(&ap);
+    //listaImoveis.push_back(&terreno);
+    //listaImoveis.push_back(&casa);
+    //listaImoveis.push_back(&ap);
     //ap.show();
 
+    lerArquivo(listaImoveis);
     while(flag)
         flag = menu(listaImoveis);
 
