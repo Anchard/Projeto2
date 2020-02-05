@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1580767570 source:c:\users\lucas\documents\codes\projeto2\main.cpp
+1580899495 source:c:\users\lucas\documents\codes\projeto2\main.cpp
 	<iostream>
 	<memory>
 	"Imovel.h"
@@ -7,6 +7,7 @@
 	"Apartamento.h"
 	<vector>
 	<stdio.h>
+	"Terreno.h"
 
 1580758402 source:c:\users\lucas\documents\codes\projeto2\src\imovel.cpp
 	"Imovel.h"
@@ -20,7 +21,7 @@
 	"Casa.h"
 	<iostream>
 
-1580764067 c:\users\lucas\documents\codes\projeto2\include\casa.h
+1580897311 c:\users\lucas\documents\codes\projeto2\include\casa.h
 	"Imovel.h"
 	"Endereco.h"
 
@@ -28,8 +29,9 @@
 	"Apartamento.h"
 	<iostream>
 
-1578363783 c:\users\lucas\documents\codes\projeto2\include\apartamento.h
+1580897546 c:\users\lucas\documents\codes\projeto2\include\apartamento.h
 	"Imovel.h"
+	"Endereco.h"
 
 1580758354 c:\users\lucas\documents\codes\projeto2\include\endereco.h
 	<string>
@@ -37,8 +39,13 @@
 1580757757 source:c:\users\lucas\documents\codes\projeto2\src\endereco.cpp
 	"Endereco.h"
 
-1580762914 source:c:\users\lucas\documents\codes\projeto2\src\terreno.cpp
+1580832124 source:c:\users\lucas\documents\codes\projeto2\src\terreno.cpp
 	"Terreno.h"
+	<iostream>
+	<string>
 
-1580762914 c:\users\lucas\documents\codes\projeto2\include\terreno.h
+1580897499 c:\users\lucas\documents\codes\projeto2\include\terreno.h
+	"Imovel.h"
+	"Endereco.h"
+	<string>
 

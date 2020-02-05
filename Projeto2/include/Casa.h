@@ -20,7 +20,7 @@ class Casa: public Imovel{
 
     public:
         Casa(){
-            this->tipo = -1;
+            this->tipo = 0;
             this->titulo = "empty";
             this->endereco.cidade = "empty";
             this->endereco.bairro = "empty";

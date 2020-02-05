@@ -5,6 +5,7 @@
 #include "Apartamento.h"
 #include <vector>
 #include <stdio.h>
+#include "Terreno.h"
 
 using namespace std;
 
@@ -14,7 +15,7 @@ void showType(vector<Imovel*> listaImoveis, int i){
     else if(listaImoveis[i]->getTipo() == 1)
         ((Apartamento*)listaImoveis[i])->show();
     else if(listaImoveis[i]->getTipo() == 2)
-        listaImoveis[i]->show();
+        ((Terreno*)listaImoveis[i])->show();
 }
 
 string upperCase(string input) {
@@ -260,7 +261,11 @@ void remover(vector<Imovel*> &listaImoveis){
 }
 
 void editar(vector<Imovel*> &listaImoveis){
+    string stream;
+    int numero;
+    float valor;
     int id;
+    int opcao;
 
     buscar(listaImoveis);
     cout << "Digite o ID do Imovel que Deseja Editar: ";
@@ -269,8 +274,6 @@ void editar(vector<Imovel*> &listaImoveis){
 
     switch(listaImoveis[id]->getTipo()){
         case 0:
-            int opcao;
-
             cout << "01. Editar Titulo" << endl;
             cout << "02. Editar Cidade" << endl;
             cout << "03. Editar Bairro" << endl;
@@ -288,14 +291,11 @@ void editar(vector<Imovel*> &listaImoveis){
             cin >> opcao;
             cout << endl;
 
-            string stream;
-            int numero;
-            float valor;
             switch(opcao){
                 case 1:
                     cout << "Novo Titulo: ";
                     fflush(stdin);
-                    cin >> stream;
+                    getline(cin, stream);
                     cout << endl;
                     listaImoveis[id]->setTitulo(stream);
                     cout << "Alteracao Efetuada\n\n";
@@ -303,7 +303,7 @@ void editar(vector<Imovel*> &listaImoveis){
                 case 2:
                     cout << "Nova Cidade: ";
                     fflush(stdin);
-                    cin >> stream;
+                    getline(cin, stream);
                     cout << endl;
                     listaImoveis[id]->setCidade(stream);
                     cout << "Alteracao Efetuada\n\n";
@@ -311,7 +311,7 @@ void editar(vector<Imovel*> &listaImoveis){
                 case 3:
                     cout << "Novo Bairro: ";
                     fflush(stdin);
-                    cin >> stream;
+                    getline(cin, stream);
                     cout << endl;
                     listaImoveis[id]->setBairro(stream);
                     cout << "Alteracao Efetuada\n\n";
@@ -319,7 +319,7 @@ void editar(vector<Imovel*> &listaImoveis){
                 case 4:
                     cout << "Novo Logradouro: ";
                     fflush(stdin);
-                    cin >> stream;
+                    getline(cin, stream);
                     cout << endl;
                     listaImoveis[id]->setLogradouro(stream);
                     cout << "Alteracao Efetuada\n\n";
@@ -327,7 +327,7 @@ void editar(vector<Imovel*> &listaImoveis){
                 case 5:
                     cout << "Novo Numero: ";
                     fflush(stdin);
-                    cin >> stream;
+                    getline(cin, stream);
                     cout << endl;
                     listaImoveis[id]->setNumero(stream);
                     cout << "Alteracao Efetuada\n\n";
@@ -335,7 +335,7 @@ void editar(vector<Imovel*> &listaImoveis){
                 case 6:
                     cout << "Novo CEP: ";
                     fflush(stdin);
-                    cin >> stream;
+                    getline(cin, stream);
                     cout << endl;
                     listaImoveis[id]->setCep(stream);
                     cout << "Alteracao Efetuada\n\n";
@@ -362,17 +362,263 @@ void editar(vector<Imovel*> &listaImoveis){
                     cout << "Alteracao Efetuada\n\n";
                     break;
                 case 10:
-                    cout << "Numero de Pavimentos: ";
+                    cout << "Novo Numero de Pavimentos: ";
                     cin >> numero;
                     cout << endl;
                     ((Casa*)listaImoveis[id])->setPavimentos(numero);
                     cout << "Alteracao Efetuada\n\n";
                     break;
                 case 11:
-                    cout << "Numero de Quartos: ";
+                    cout << "Novo Numero de Quartos: ";
                     cin >> numero;
                     cout << endl;
                     ((Casa*)listaImoveis[id])->setQuartos(numero);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 12:
+                    cout << "Nova Area do Terreno: ";
+                    cin >> valor;
+                    cout << endl;
+                    ((Casa*)listaImoveis[id])->setAreaTerreno(valor);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 13:
+                    cout << "Nova Area Construida: ";
+                    cin >> valor;
+                    cout << endl;
+                    ((Casa*)listaImoveis[id])->setAreaConstruida(valor);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+            }
+
+        case 1:
+
+            cout << "01. Editar Titulo" << endl;
+            cout << "02. Editar Cidade" << endl;
+            cout << "03. Editar Bairro" << endl;
+            cout << "04. Editar Logradouro" << endl;
+            cout << "05. Editar Numero" << endl;
+            cout << "06. Editar CEP" << endl;
+            cout << "07. Editar Aluga ou Vende" << endl;
+            cout << "08. Preco do Aluguel" << endl;
+            cout << "09. Preco de Venda" << endl;
+            cout << "10. Editar Area" << endl;
+            cout << "11. Numero de Quartos" << endl;
+            cout << "12. Editar Posicao" << endl;
+            cout << "13. Editar Andar" << endl;
+            cout << "14. Editar Valor do Condominio" << endl;
+            cout << "15. Editar Quantidade de Vagas de Garagem" << endl;
+            cout << "Digite a Opcao Desejada: ";
+            cin >> opcao;
+            cout << endl;
+
+            switch(opcao){
+                case 1:
+                    cout << "Novo Titulo: ";
+                    fflush(stdin);
+                    getline(cin, stream);
+                    cout << endl;
+                    listaImoveis[id]->setTitulo(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 2:
+                    cout << "Nova Cidade: ";
+                    fflush(stdin);
+                    getline(cin, stream);
+                    cout << endl;
+                    listaImoveis[id]->setCidade(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 3:
+                    cout << "Novo Bairro: ";
+                    fflush(stdin);
+                    getline(cin, stream);
+                    cout << endl;
+                    listaImoveis[id]->setBairro(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 4:
+                    cout << "Novo Logradouro: ";
+                    fflush(stdin);
+                    getline(cin, stream);
+                    cout << endl;
+                    listaImoveis[id]->setLogradouro(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 5:
+                    cout << "Novo Numero: ";
+                    fflush(stdin);
+                    getline(cin, stream);
+                    cout << endl;
+                    listaImoveis[id]->setNumero(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 6:
+                    cout << "Novo CEP: ";
+                    fflush(stdin);
+                    getline(cin, stream);
+                    cout << endl;
+                    listaImoveis[id]->setCep(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 7:
+                    cout << "0. Aluga 1. Vende: ";
+                    cin >> numero;
+                    cout << endl;
+                    listaImoveis[id]->setAluga_vende(numero);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 8:
+                    cout << "Novo Valor do Aluguel: ";
+                    cin >> valor;
+                    cout << endl;
+                    listaImoveis[id]->setPrecoAluguel(valor);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 9:
+                    cout << "Novo Valor de Venda: ";
+                    cin >> valor;
+                    cout << endl;
+                    listaImoveis[id]->setPrecoVenda(valor);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 10:
+                    cout << "Nova Area: ";
+                    cin >> valor;
+                    cout << endl;
+                    ((Apartamento*)listaImoveis[id])->setArea(valor);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 11:
+                    cout << "Novo Numero de Quartos: ";
+                    cin >> numero;
+                    cout << endl;
+                    ((Apartamento*)listaImoveis[id])->setQuartos(numero);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 12:
+                    cout << "Editar Posicao: ";
+                    fflush(stdin);
+                    getline(cin, stream);
+                    cout << endl;
+                    ((Apartamento*)listaImoveis[id])->setPosicao(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 13:
+                    cout << "Novo Andar: ";
+                    cin >> numero;
+                    cout << endl;
+                    ((Apartamento*)listaImoveis[id])->setAndar(numero);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 14:
+                    cout << "Novo Valor do Condominio: ";
+                    cin >> valor;
+                    cout << endl;
+                    ((Apartamento*)listaImoveis[id])->setCondominio(valor);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 15:
+                    cout << "Nova Quantidade de Vagas na Garagem: ";
+                    cin >> numero;
+                    cout << endl;
+                    ((Apartamento*)listaImoveis[id])->setGaragem(numero);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+            }
+
+        case 2:
+            //int opcao;
+
+            cout << "01. Editar Titulo" << endl;
+            cout << "02. Editar Cidade" << endl;
+            cout << "03. Editar Bairro" << endl;
+            cout << "04. Editar Logradouro" << endl;
+            cout << "05. Editar Numero" << endl;
+            cout << "06. Editar CEP" << endl;
+            cout << "07. Editar Aluga ou Vende" << endl;
+            cout << "08. Preco do Aluguel" << endl;
+            cout << "09. Preco de Venda" << endl;
+            cout << "10. Area do Terreno" << endl;
+            cout << "Digite a Opcao Desejada: ";
+            cin >> opcao;
+            cout << endl;
+
+            switch(opcao){
+                case 1:
+                    cout << "Novo Titulo: ";
+                    fflush(stdin);
+                    getline(cin, stream);
+                    cout << endl;
+                    listaImoveis[id]->setTitulo(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 2:
+                    cout << "Nova Cidade: ";
+                    fflush(stdin);
+                    getline(cin, stream);
+                    cout << endl;
+                    listaImoveis[id]->setCidade(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 3:
+                    cout << "Novo Bairro: ";
+                    fflush(stdin);
+                    getline(cin, stream);
+                    cout << endl;
+                    listaImoveis[id]->setBairro(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 4:
+                    cout << "Novo Logradouro: ";
+                    fflush(stdin);
+                    getline(cin, stream);
+                    cout << endl;
+                    listaImoveis[id]->setLogradouro(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 5:
+                    cout << "Novo Numero: ";
+                    fflush(stdin);
+                    getline(cin, stream);
+                    cout << endl;
+                    listaImoveis[id]->setNumero(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 6:
+                    cout << "Novo CEP: ";
+                    fflush(stdin);
+                    getline(cin, stream);
+                    cout << endl;
+                    listaImoveis[id]->setCep(stream);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 7:
+                    cout << "0. Aluga 1. Vende: ";
+                    cin >> numero;
+                    cout << endl;
+                    listaImoveis[id]->setAluga_vende(numero);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 8:
+                    cout << "Novo Valor do Aluguel: ";
+                    cin >> valor;
+                    cout << endl;
+                    listaImoveis[id]->setPrecoAluguel(valor);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 9:
+                    cout << "Novo Valor de Venda: ";
+                    cin >> valor;
+                    cout << endl;
+                    listaImoveis[id]->setPrecoVenda(valor);
+                    cout << "Alteracao Efetuada\n\n";
+                    break;
+                case 10:
+                    cout << "Nova Area do Terreno: ";
+                    cin >> valor;
+                    cout << endl;
+                    ((Terreno*)listaImoveis[id])->setAreaTerreno(valor);
                     cout << "Alteracao Efetuada\n\n";
                     break;
             }
@@ -415,21 +661,16 @@ void menu(vector<Imovel*> &listaImoveis){
         case 5:
             editar(listaImoveis);
             break;
-
-
-
     }
-
 }
 
 int main(){
     vector<Imovel*> listaImoveis;
-    listaImoveis.reserve(30);
 
-    Imovel imovel(2, "Terreno Legal em Mangabeira", "Joao Pessoa", "Mangabeira", "Estudante Marizete",
-                  "246", "58058-300", 0, -1, 520.24);
+    Terreno terreno(2, "Terreno Legal em Mangabeira", "Joao Pessoa", "Mangabeira", "Estudante Marizete",
+                  "246", "58058-300", 0, -1, 520.24, 250);
 
-    listaImoveis.push_back(&imovel);
+    listaImoveis.push_back(&terreno);
     //imovel.show();
 
     Casa casa(0, "Casa Bonita na Torre", "Joao Pessoa", "Torre", "Geminiano da Franca", "231", "58040-560", 1,

@@ -2,16 +2,13 @@
 #define APARTAMENTO_H
 
 #include "Imovel.h"
+#include "Endereco.h"
 
 class Apartamento: public Imovel{
     private:
         int tipo;
         string titulo;
-        string cidade;
-        string bairro;
-        string logradouro;
-        string numero;
-        string cep;
+        Endereco endereco;
         string aluga_vende;
         float precoVenda;
         float precoAluguel;
@@ -24,17 +21,36 @@ class Apartamento: public Imovel{
         int garagem;
 
     public:
+        Apartamento(){
+            this->tipo = 1;
+            this->titulo = "empty";
+            this->endereco.cidade = "empty";
+            this->endereco.bairro = "empty";
+            this->endereco.logradouro = "empty";
+            this->endereco.numero = "empty";
+            this->endereco.cep = "empty";
+            this->aluga_vende = -1;
+            this->precoVenda = -1;
+            this->precoAluguel = -1;
+            this->area = -1;
+            this->quartos = -1;
+            this->posicao = -1;
+            this->andar = -1;
+            this->condominio = -1;
+            this->garagem = -1;
+        }
+
         Apartamento(int tipo, string titulo, string cidade, string bairro, string logradouro,
         string numero, string cep, int aluga_vende, float precoVenda, float precoAluguel, float area,
         int quartos, string posicao, int andar, float condominio, int garagem):
         Imovel(tipo, titulo, cidade, bairro, logradouro, numero, cep, aluga_vende, precoVenda, precoAluguel){
             this->tipo = tipo;
             this->titulo = titulo;
-            this->cidade = cidade;
-            this->bairro = bairro;
-            this->logradouro = logradouro;
-            this->numero = numero;
-            this->cep = cep;
+            this->endereco.cidade = cidade;
+            this->endereco.bairro = bairro;
+            this->endereco.logradouro = logradouro;
+            this->endereco.numero = numero;
+            this->endereco.cep = cep;
             this->aluga_vende = aluga_vende;
             this->precoVenda = precoVenda;
             this->precoAluguel = precoAluguel;
