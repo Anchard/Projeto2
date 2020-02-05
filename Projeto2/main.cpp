@@ -6,6 +6,7 @@
 #include <vector>
 #include <stdio.h>
 #include "Terreno.h"
+#include <fstream>
 
 using namespace std;
 
@@ -24,6 +25,71 @@ string upperCase(string input) {
     return input;
 }
 
+void salvaArquivo(vector<Imovel*> listaImoveis) {
+    int tam = listaImoveis.size();
+    ofstream file;
+
+    file.open("dados.txt");
+    if (!file.is_open()) {
+        cout << "Nao foi possivel abrir o arquivo para escrita\n" << endl;
+        return ;
+    }
+    for (int i = 0; i < tam; i++){
+        if(listaImoveis[i]->getTipo() == 0){
+            file << listaImoveis[i]->getTipo() << endl;
+            file << listaImoveis[i]->getTitulo() << endl;
+            file << listaImoveis[i]->getCidade() << endl;
+            file << listaImoveis[i]->getBairro() << endl;
+            file << listaImoveis[i]->getLogradouro() << endl;
+            file << listaImoveis[i]->getNumero() << endl;
+            file << listaImoveis[i]->getCep() << endl;
+            file << listaImoveis[i]->getAluga_vende() << endl;
+            file << listaImoveis[i]->getPrecoVenda() << endl;
+            file << listaImoveis[i]->getPrecoAluguel() << endl;
+            file << ((Casa*) listaImoveis[i])->getPavimentos() << endl;
+            file << ((Casa*) listaImoveis[i])->getQuartos() << endl;
+            file << ((Casa*) listaImoveis[i])->getAreaTerreno() << endl;
+            file << ((Casa*) listaImoveis[i])->getAreaConstruida() << endl;
+        }
+
+        else if(listaImoveis[i]->getTipo() == 1){
+            file << listaImoveis[i]->getTipo() << endl;
+            file << listaImoveis[i]->getTitulo() << endl;
+            file << listaImoveis[i]->getCidade() << endl;
+            file << listaImoveis[i]->getBairro() << endl;
+            file << listaImoveis[i]->getLogradouro() << endl;
+            file << listaImoveis[i]->getNumero() << endl;
+            file << listaImoveis[i]->getCep() << endl;
+            file << listaImoveis[i]->getAluga_vende() << endl;
+            file << listaImoveis[i]->getPrecoVenda() << endl;
+            file << listaImoveis[i]->getPrecoAluguel() << endl;
+            file << ((Apartamento*) listaImoveis[i])->getArea() << endl;
+            file << ((Apartamento*) listaImoveis[i])->getQuartos() << endl;
+            file << ((Apartamento*) listaImoveis[i])->getPosicao() << endl;
+            file << ((Apartamento*) listaImoveis[i])->getAndar() << endl;
+            file << ((Apartamento*) listaImoveis[i])->getCondominio() << endl;
+            file << ((Apartamento*) listaImoveis[i])->getGaragem() << endl;
+        }
+
+        else if(listaImoveis[i]->getTipo() == 2){
+            file << listaImoveis[i]->getTipo() << endl;
+            file << listaImoveis[i]->getTitulo() << endl;
+            file << listaImoveis[i]->getCidade() << endl;
+            file << listaImoveis[i]->getBairro() << endl;
+            file << listaImoveis[i]->getLogradouro() << endl;
+            file << listaImoveis[i]->getNumero() << endl;
+            file << listaImoveis[i]->getCep() << endl;
+            file << listaImoveis[i]->getAluga_vende() << endl;
+            file << listaImoveis[i]->getPrecoVenda() << endl;
+            file << listaImoveis[i]->getPrecoAluguel() << endl;
+            file << ((Terreno*) listaImoveis[i])->getAreaTerreno() << endl;
+        }
+    }
+
+    cout << "Arquivo Salvo!\n\n";
+    file.close();
+}
+
 void inserir(vector<Imovel*> &listaImoveis){
     int opcao;
     cout << "Inserir: " << endl;
@@ -37,62 +103,166 @@ void inserir(vector<Imovel*> &listaImoveis){
     string stream;
     int numero;
     float valor;
-    Casa casa;
+    Casa *casa = new Casa();
+    Apartamento *ap = new Apartamento();
+    Terreno *terreno = new Terreno();
     switch(opcao){
         case 0:
-            cout << "Titulo" << endl;
-            cout << "Cidade" << endl;
-            cout << "Bairro" << endl;
-            cout << "Logradouro" << endl;
-            cout << "Numero" << endl;
-            cout << "CEP" << endl;
-            cout << "0. Aluga 1. Vende" << endl;
-            cout << "Preco do Aluguel" << endl;
-            cout << "Preco de Venda" << endl;
-            cout << "Numero de Pavimentos" << endl;
-            cout << "Numero de Quartos" << endl;
-            cout << "Area do Terreno" << endl;
-            cout << "Area Construida" << "\n\n";
+            cout << "-> Titulo" << endl;
+            cout << "-> Cidade" << endl;
+            cout << "-> Bairro" << endl;
+            cout << "-> Logradouro" << endl;
+            cout << "-> Numero" << endl;
+            cout << "-> CEP" << endl;
+            cout << "-> 0. Aluga 1. Vende" << endl;
+            cout << "-> Preco de Venda" << endl;
+            cout << "-> Preco do Aluguel" << endl;
+            cout << "-> Numero de Pavimentos" << endl;
+            cout << "-> Numero de Quartos" << endl;
+            cout << "-> Area do Terreno" << endl;
+            cout << "-> Area Construida" << "\n\n";
 
-            casa.setTipo(0);
+            casa->setTipo(0);
             fflush(stdin);
             getline(cin, stream);
-            casa.setTitulo(stream);
+            casa->setTitulo(stream);
             fflush(stdin);
             getline(cin, stream);
-            casa.setCidade(stream);
+            casa->setCidade(stream);
             fflush(stdin);
             getline(cin, stream);
-            casa.setBairro(stream);
+            casa->setBairro(stream);
             fflush(stdin);
             getline(cin, stream);
-            casa.setLogradouro(stream);
+            casa->setLogradouro(stream);
             fflush(stdin);
             getline(cin, stream);
-            casa.setNumero(stream);
+            casa->setNumero(stream);
             fflush(stdin);
             getline(cin, stream);
-            casa.setCep(stream);
+            casa->setCep(stream);
             cin >> numero;
-            casa.setAluga_vende(numero);
+            casa->setAluga_vende(numero);
             cin >> valor;
-            casa.setPrecoAluguel(valor);
+            casa->setPrecoVenda(valor);
             cin >> valor;
-            casa.setPrecoVenda(valor);
+            casa->setPrecoAluguel(valor);
             cin >> numero;
-            casa.setPavimentos(numero);
+            casa->setPavimentos(numero);
             cin >> numero;
-            casa.setQuartos(numero);
+            casa->setQuartos(numero);
             cin >> valor;
-            casa.setAreaTerreno(valor);
+            casa->setAreaTerreno(valor);
             cin >> valor;
-            casa.setAreaConstruida(valor);
+            casa->setAreaConstruida(valor);
             cout << "\nCasa Adicionada com Sucesso!\n\n";
 
-            listaImoveis.push_back(&casa);
-
+            listaImoveis.push_back(casa);
             break;
 
+        case 1:
+            cout << "-> Titulo" << endl;
+            cout << "-> Cidade" << endl;
+            cout << "-> Bairro" << endl;
+            cout << "-> Logradouro" << endl;
+            cout << "-> Numero" << endl;
+            cout << "-> CEP" << endl;
+            cout << "-> 0. Aluga 1. Vende" << endl;
+            cout << "-> Preco de Venda" << endl;
+            cout << "-> Preco do Aluguel" << endl;
+            cout << "-> Area" << endl;
+            cout << "-> Numero de Quartos" << endl;
+            cout << "-> Posicao" << endl;
+            cout << "-> Andar" << endl;
+            cout << "-> Preco do Condominio" << endl;
+            cout << "-> Vagas na Garagem" << "\n\n";
+
+            ap->setTipo(1);
+            fflush(stdin);
+            getline(cin, stream);
+            ap->setTitulo(stream);
+            fflush(stdin);
+            getline(cin, stream);
+            ap->setCidade(stream);
+            fflush(stdin);
+            getline(cin, stream);
+            ap->setBairro(stream);
+            fflush(stdin);
+            getline(cin, stream);
+            ap->setLogradouro(stream);
+            fflush(stdin);
+            getline(cin, stream);
+            ap->setNumero(stream);
+            fflush(stdin);
+            getline(cin, stream);
+            ap->setCep(stream);
+            cin >> numero;
+            ap->setAluga_vende(numero);
+            cin >> valor;
+            ap->setPrecoVenda(valor);
+            cin >> valor;
+            ap->setPrecoAluguel(valor);
+            cin >> valor;
+            ap->setArea(valor);
+            cin >> numero;
+            ap->setQuartos(numero);
+            fflush(stdin);
+            getline(cin, stream);
+            ap->setPosicao(stream);
+            cin >> numero;
+            ap->setAndar(numero);
+            cin >> valor;
+            ap->setCondominio(valor);
+            cin >> numero;
+            ap->setGaragem(numero);
+            cout << "\nApartamento Adicionado com Sucesso!\n\n";
+
+            listaImoveis.push_back(ap);
+            break;
+
+        case 2:
+            cout << "-> Titulo" << endl;
+            cout << "-> Cidade" << endl;
+            cout << "-> Bairro" << endl;
+            cout << "-> Logradouro" << endl;
+            cout << "-> Numero" << endl;
+            cout << "-> CEP" << endl;
+            cout << "-> 0. Aluga 1. Vende" << endl;
+            cout << "-> Preco de Venda" << endl;
+            cout << "-> Preco do Aluguel" << endl;
+            cout << "-> Area do Terreno" << "\n\n";
+
+            terreno->setTipo(2);
+            fflush(stdin);
+            getline(cin, stream);
+            terreno->setTitulo(stream);
+            fflush(stdin);
+            getline(cin, stream);
+            terreno->setCidade(stream);
+            fflush(stdin);
+            getline(cin, stream);
+            terreno->setBairro(stream);
+            fflush(stdin);
+            getline(cin, stream);
+            terreno->setLogradouro(stream);
+            fflush(stdin);
+            getline(cin, stream);
+            terreno->setNumero(stream);
+            fflush(stdin);
+            getline(cin, stream);
+            terreno->setCep(stream);
+            cin >> numero;
+            terreno->setAluga_vende(numero);
+            cin >> valor;
+            terreno->setPrecoVenda(valor);
+            cin >> valor;
+            terreno->setPrecoAluguel(valor);
+            cin >> valor;
+            terreno->setAreaTerreno(valor);
+            cout << "\nTerreno Adicionado com Sucesso!\n\n";
+
+            listaImoveis.push_back(terreno);
+            break;
     }
 }
 void listar(vector<Imovel*> listaImoveis){
@@ -391,6 +561,8 @@ void editar(vector<Imovel*> &listaImoveis){
                     break;
             }
 
+            break;
+
         case 1:
 
             cout << "01. Editar Titulo" << endl;
@@ -527,6 +699,8 @@ void editar(vector<Imovel*> &listaImoveis){
                     break;
             }
 
+            break;
+
         case 2:
             //int opcao;
 
@@ -628,8 +802,9 @@ void editar(vector<Imovel*> &listaImoveis){
 
 
 
-void menu(vector<Imovel*> &listaImoveis){
+int menu(vector<Imovel*> &listaImoveis){
     int opcao;
+    int flag = 1;
 
     cout << "Qual Operacao Deseja Realizar?" << endl;
     cout << "1. Inserir Imovel" << endl;
@@ -637,6 +812,7 @@ void menu(vector<Imovel*> &listaImoveis){
     cout << "3. Buscar Imovel" << endl;
     cout << "4. Remover Imovel" << endl;
     cout << "5. Editar Imovel" << endl;
+    cout << "7. Sair/Salvar em Arquivo" << endl;
     cout << "Escolha: ";
     cin >> opcao;
     cout << endl;
@@ -661,11 +837,18 @@ void menu(vector<Imovel*> &listaImoveis){
         case 5:
             editar(listaImoveis);
             break;
+
+        case 7:
+            salvaArquivo(listaImoveis);
+            flag = 0;
+            break;
     }
+    return flag;
 }
 
 int main(){
     vector<Imovel*> listaImoveis;
+    int flag = 1;
 
     Terreno terreno(2, "Terreno Legal em Mangabeira", "Joao Pessoa", "Mangabeira", "Estudante Marizete",
                   "246", "58058-300", 0, -1, 520.24, 250);
@@ -680,7 +863,6 @@ int main(){
     casa.setPrecoAluguel(370.44);
     casa.setPrecoVenda(-1);
     casa.setPavimentos(2);
-    casa.setCidade("Cabedelo");
 
     listaImoveis.push_back(&casa);
     //casa.show();
@@ -691,8 +873,10 @@ int main(){
     listaImoveis.push_back(&ap);
     //ap.show();
 
-    while(true)
-        menu(listaImoveis);
+    while(flag)
+        flag = menu(listaImoveis);
+
+    cout << "Obrigado pela Utilizacao!" << endl;
 
     return 0;
 }

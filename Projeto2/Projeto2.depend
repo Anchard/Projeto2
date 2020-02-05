@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1580899495 source:c:\users\lucas\documents\codes\projeto2\main.cpp
+1580925938 source:c:\users\lucas\documents\codes\projeto2\main.cpp
 	<iostream>
 	<memory>
 	"Imovel.h"
@@ -8,6 +8,7 @@
 	<vector>
 	<stdio.h>
 	"Terreno.h"
+	<fstream>
 
 1580758402 source:c:\users\lucas\documents\codes\projeto2\src\imovel.cpp
 	"Imovel.h"

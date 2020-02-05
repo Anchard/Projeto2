@@ -1,0 +1,41 @@
+2
+Terreno Legal em Mangabeira
+Joao Pessoa
+Mangabeira
+Estudante Marizete
+246
+58058-300
+0
+-1
+520.24
+250
+0
+Casa Bonita na Torre
+Cabedelo
+Torre
+Geminiano da Franca
+231
+58040-560
+0
+-1
+370.44
+2
+3
+320.42
+280
+1
+Apartamento Luxuoso
+Joao Pessoa
+Manaira
+Rua da Soberba
+621
+58058-621
+1
+950000
+-1
+350
+5
+Nascente do Poente
+7
+932.47
+2
