@@ -1,14 +1,3 @@
-i002
-Terreno Legal em Mangabeira
-Joao Pessoa
-Mangabeira
-Estudante Marizete
-246
-58058-300
-0
--1
-520.24
-250
 i000
 Casa Bonita na Torre
 Joao Pessoa

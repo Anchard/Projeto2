@@ -477,6 +477,7 @@ void buscar(vector<Imovel*> listaImoveis){
 
     string target;
     float valor;
+    int numero;
     switch(opcao){
         case 1:
             cout << "Digite o nome da Cidade: ";
@@ -530,11 +531,24 @@ void buscar(vector<Imovel*> listaImoveis){
             cout << "Digite o Preco do Aluguel Desejado: R$  ";
             cin >> valor;
             cout << endl;
+            cout << "Pesquisar Valor Abaixo: 1, Acima: 2: ";
+            cin >> numero;
+            cout << endl;
 
-            for(int i = 0; i < elementos; i++){
-                if(listaImoveis[i]->getPrecoAluguel() <= valor && listaImoveis[i]->getPrecoAluguel() > 0){
-                    cout << "ID: " << i << endl;
-                    listaImoveis[i]->show();
+            if(numero == 1){
+                for(int i = 0; i < elementos; i++){
+                    if(listaImoveis[i]->getPrecoAluguel() <= valor && listaImoveis[i]->getPrecoAluguel() > 0){
+                        cout << "ID: " << i << endl;
+                        listaImoveis[i]->show();
+                    }
+                }
+            }
+            else if(numero == 2){
+                for(int i = 0; i < elementos; i++){
+                    if(listaImoveis[i]->getPrecoAluguel() >= valor && listaImoveis[i]->getPrecoAluguel() > 0){
+                        cout << "ID: " << i << endl;
+                        listaImoveis[i]->show();
+                    }
                 }
             }
 
@@ -544,11 +558,24 @@ void buscar(vector<Imovel*> listaImoveis){
             cout << "Digite o Preco do Imovel Desejado: R$  ";
             cin >> valor;
             cout << endl;
+            cout << "Pesquisar Valor Abaixo: 1, Acima: 2: ";
+            cin >> numero;
+            cout << endl;
 
-            for(int i = 0; i < elementos; i++){
-                if(listaImoveis[i]->getPrecoVenda() <= valor && listaImoveis[i]->getPrecoVenda() > 0){
-                    cout << "ID: " << i << endl;
-                    listaImoveis[i]->show();
+            if(numero == 1){
+                for(int i = 0; i < elementos; i++){
+                    if(listaImoveis[i]->getPrecoVenda() <= valor && listaImoveis[i]->getPrecoVenda() > 0){
+                        cout << "ID: " << i << endl;
+                        listaImoveis[i]->show();
+                    }
+                }
+            }
+            else if(numero == 2){
+                    for(int i = 0; i < elementos; i++){
+                        if(listaImoveis[i]->getPrecoVenda() >= valor && listaImoveis[i]->getPrecoVenda() > 0){
+                            cout << "ID: " << i << endl;
+                            listaImoveis[i]->show();
+                    }
                 }
             }
 
